@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Cost Calculator</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Cost Calculator</h1>
+        
+        <section>
+            <h2>1. Calculate Fabric Cost</h2>
+            <input type="number" id="fabricCost" placeholder="Fabric Cost" />
+            <input type="number" id="fabricUsed" placeholder="Kapda Used (Meters)" />
+            <input type="number" id="costPerMeter" placeholder="Cost per Meter" />
+            <button onclick="calculateFabricCost()">Calculate Fabric Cost</button>
+            <p id="fabricCostResult">Fabric Cost: $0</p>
+        </section>
+
+        <section>
+            <h2>2. Calculate Aster Cost</h2>
+            <input type="number" id="asterCost" placeholder="Aster Cost" />
+            <input type="number" id="asterUsed" placeholder="Aster Used (Meters)" />
+            <input type="number" id="asterCostPerMeter" placeholder="Cost Per Meter" />
+            <button onclick="calculateAsterCost()">Calculate Aster Cost</button>
+            <p id="asterCostResult">Aster Cost: $0</p>
+        </section>
+
+        <section>
+            <h2>3. Sum All Costs Before GST</h2>
+            <input type="number" id="accessoriesCost" placeholder="Accessories" />
+            <input type="number" id="labourCost" placeholder="Labour Cost" />
+            <input type="number" id="shippingCost" placeholder="Shipping" />
+            <button onclick="calculateSubtotal()">Calculate Subtotal</button>
+            <p id="subtotalResult">Subtotal: $0</p>
+        </section>
+
+        <section>
+            <h2>4. Calculate GST</h2>
+            <input type="number" id="gstRate" placeholder="GST Rate (%)" />
+            <button onclick="calculateGST()">Calculate GST</button>
+            <p id="gstResult">GST Amount: $0</p>
+        </section>
+
+        <section>
+            <h2>5. Finally, Calculate the Total Price</h2>
+            <button onclick="calculateTotalPrice()">Calculate Total Price</button>
+            <p id="totalPriceResult">Total Price: $0</p>
+        </section>
+
+        <section>
+            <h2>6. Add Profite Price To Product</h2>
+            <input type="number" id="profitPercentage" placeholder="Profit Percentage (%)" />
+            <button onclick="calculateMRP()">Calculate MRP</button>
+            <p id="mrpResult">MRP: $0</p>
+        </section>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
