@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Cost Calculator</title>
+    <style>
+        body {
+            background-color: #e0f7fa; /* Light cyan background */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff; /* White background for the container */
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #333;
+        }
+        input {
+            width: calc(33% - 10px);
+            margin: 5px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            background-color: #4CAF50; /* Green button */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+        section {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cost Calculator</h1>
+        
+        <section>
+            <h2>1. Calculate Fabric Cost</h2>
+            <input type="number" id="fabricUsed" placeholder="Kapda Used (Meters)" />
+            <input type="number" id="costPerMeter" placeholder="Cost per Meter" />
+            <button onclick="calculateFabricCost()">Calculate Fabric Cost</button>
+            <p id="fabricCostResult">Fabric Cost: $0</p>
+        </section>
+
+        <section>
+            <h2>2. Calculate Aster Cost</h2>
+            <input type="number" id="asterUsed" placeholder="Aster Used (Meters)" />
+            <input type="number" id="asterCostPerMeter" placeholder="Cost Per Meter" />
+            <button onclick="calculateAsterCost()">Calculate Aster Cost</button>
+            <p id="asterCostResult">Aster Cost: $0</p>
+        </section>
+
+        <section>
+            <h2>3. Sum All Costs Before GST</h2>
+            <input type="number" id="accessoriesCost" placeholder="Accessories" />
+            <input type="number" id="labourCost" placeholder="Labour Cost" />
+            <input type="number" id="shippingCost" placeholder="Shipping" />
+            <button onclick="calculateSubtotal()">Calculate Subtotal</button>
+            <p id="subtotalResult">Subtotal: $0</p>
+        </section>
+
+        <section>
+            <h2>4. Calculate GST</h2>
+            <input type="number" id="gstRate" placeholder="GST Rate (%)" />
+            <button onclick="calculateGST()">Calculate GST</button>
+            <p id="gstResult">GST Amount: $0</p>
+        </section>
+
+        <section>
+            <h2>5. Finally, Calculate the Total Price</h2>
+            <button onclick="calculateTotalPrice()">Calculate Total Price</button>
+            <p id="totalPriceResult">Total Price: $0</p>
+        </section>
+
+        <section>
+            <h2>6. Add Profite Price To Product</h2>
+            <input type="number" id="profitPercentage" placeholder="Profit Percentage (%)" />
+            <button onclick="calculateMRP()">Calculate MRP</button>
+            <p id="mrpResult">MRP: $0</p>
+        </section>
+    </div>
+    
+    <script>
+        function calculateFabricCost() {
+            const fabricUsed = parseFloat(document.getElementById('fabricUsed').value) || 0;
+            const costPerMeter = parseFloat(document.getElementById('costPerMeter').value) || 0;
+            const totalFabricCost = fabricUsed * costPerMeter;
+            document.getElementById('fabricCostResult').textContent = `Fabric Cost: $${totalFabricCost.toFixed(2)}`;
+        }
+
+        function calculateAsterCost() {
+            const asterUsed = parseFloat(document.getElementById('asterUsed').value) || 0;
+            const asterCostPerMeter = parseFloat(document.getElementById('asterCostPerMeter').value) || 0;
+            const totalAsterCost = asterUsed * asterCostPerMeter;
+            document.getElementById('asterCostResult').textContent = `Aster Cost: $${totalAsterCost.toFixed(2)}`;
+        }
+
+        function calculateSubtotal() {
+            const fabricCost = parseFloat(document.getElementById('fabricCostResult').textContent.split('$')[1]) || 0;
+            const asterCost = parseFloat(document.getElementById('asterCostResult').textContent.split('$')[1]) || 0;
+            const accessoriesCost = parseFloat(document.getElementById('accessoriesCost').value) || 0;
+            const labourCost = parseFloat(document.getElementById('labourCost').value) || 0;
+            const shippingCost = parseFloat(document.getElementById('shippingCost').value) || 0;
+            const subtotal = fabricCost + asterCost + accessoriesCost + labourCost + shippingCost;
+            document.getElementById('subtotalResult').textContent = `Subtotal: $${subtotal.toFixed(2)}`;
+        }
+
+        function calculateGST() {
+            const subtotal = parseFloat(document.getElementById('subtotalResult').textContent.split('$')[1]) || 0;
+            const gstRate = parseFloat(document.getElementById('gstRate').value) || 0;
+            const gstAmount = (subtotal * (gstRate / 100));
+            document.getElementById('gstResult').textContent = `GST Amount: $${gstAmount.toFixed(2)}`;
+        }
+
+        function calculateTotalPrice() {
+            const subtotal = parseFloat(document.getElementById('subtotalResult').textContent.split('$')[1]) || 0;
+            const gstAmount = parseFloat(document.getElementById('gstResult').textContent.split('$')[1]) || 0;
+            const totalPrice = subtotal + gstAmount;
+            document.getElementById('totalPriceResult').textContent = `Total Price: $${totalPrice.toFixed(2)}`;
+        }
+
+        function calculateMRP() {
+            const totalPrice = parseFloat(document.getElementById('totalPriceResult').textContent.split('$')[1]) || 0;
+            const profitPercentage = parseFloat(document.getElementById('profitPercentage').value) || 0;
+            const mrp = totalPrice + (totalPrice * (profitPercentage / 100));
+            document.getElementById('mrpResult').textContent = `MRP: $${mrp.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
